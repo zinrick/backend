@@ -11,10 +11,10 @@
     const book = { name, author };
 
     try{
-        const bookId = await bookService.createBook(book);
+        const bookid = await bookService.createBook(book);
         res.status(200).json({
             success: true,
-            message: bookId
+            message: bookid
         });
     } catch(e){
         console.log(e);

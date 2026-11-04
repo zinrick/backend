@@ -7,7 +7,7 @@ const app = express();
 
 app.use('/book',bookRoutes);
 app.use('/student',studentRoutes);
-
+app.use(express.json());
 
 try {
     const port = process.env.PORT || 3000;

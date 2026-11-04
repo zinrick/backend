@@ -3,7 +3,7 @@ import express from 'express';
 
 const studentRoutes = express.Router();
 
-studentRoutes.get('/all', studentController.fetchAllStudents);
+studentRoutes.get('/', studentController.fetchAllStudents);
 studentRoutes.post('/', studentController.insertStudent);
 studentRoutes.put('/:id', studentController.editStudent);
 studentRoutes.delete('/:id', studentController.deleteStudent);
