@@ -6,17 +6,13 @@ export const fetchAllBooks = async () => {
 }
 
 export const createBook = async (book) => {
-    const bookid = await bookModel.insert(book);
-    return bookid;
+    const bookId = await bookModel.create(book);
+    return bookId;
 }
 
-export const update = async (book) => {
-    const [result] = await pool.query(
-        "UPDATE book SET name = ?, author = ? WHERE id = ?",
-        [book.name, book.author, book.id]
-    );
-    return result.affectedRows;
-}
+export const updateBook = async (book) => {
+    return await bookModel.update(book);
+};
 
 export const deleteBook = async (id) => {
     const deletedBook = await bookModel.remove(id);

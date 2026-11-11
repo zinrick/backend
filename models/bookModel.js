@@ -5,9 +5,9 @@
     return rows;
  };
 
- export const insert = async (book) => {
+ export const create = async (book) => {
    const [result] = await pool.query(
-      "INSERT INTO book (title, author) VALUES (?, ?)",
+      "INSERT INTO book (name, author) VALUES (?, ?)",
       [book.name, book.author]
    );
 

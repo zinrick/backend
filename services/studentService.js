@@ -6,19 +6,14 @@ export const fetchAllStudents = async () => {
     return students;
 }
 export const createStudent = async (student) => {
-      const studentID = await studentModel.insert(student);
+      const studentID = await studentModel.create(student);
       return studentID;
 }
 
-export const update = async (student) => {
-    const [result] = await pool.query(
-        "UPDATE student SET name = ?, age = ? WHERE id = ?",
-        [student.name, student.age, student.id]
-    );
-    return result.affectedRows;
-}   
+export const updateStudent = async (student) => {
+    return await studentModel.update(student);
+};
 
 export const deleteStudent = async (id) => {
-    const deletedStudent = await studentModel.remove(id);
-    return deletedStudent;
-}
+    return await studentModel.remove(id);
+};

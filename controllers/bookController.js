@@ -6,15 +6,15 @@
  } 
 
  export const createBook = async (req, res) => {
-    console.log(req);
+    console.log(req.body);
     const { name, author } = req.body;
     const book = { name, author };
 
     try{
-        const bookid = await bookService.createBook(book);
+        const bookId = await bookService.createBook(book);
         res.status(200).json({
             success: true,
-            message: bookid
+            message: bookId
         });
     } catch(e){
         console.log(e);
@@ -24,7 +24,7 @@
     }
  }
 
- export const editBook = async (req, res) => {
+ export const updateBook = async (req, res) => {
     const {name, author} = req.body;
     const {id} = req.params;
     const book = {id: parseInt(id), name, author};

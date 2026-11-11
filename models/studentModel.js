@@ -1,31 +1,55 @@
- import pool from '../config/db.js';
 
- export const fetch = async () => {
-    const [rows] = await pool.query('SELECT * FROM student');
+import pool from '../config/db.js';
+
+// FETCH STUDENTS
+export const fetch = async () => {
+    const [rows] = await pool.query(
+        'SELECT * FROM student'
+    );
     return rows;
- };
+};
 
- //insert
- export const insert = async (student) => {
-   const [result] = await pool.query(
-      "INSERT INTO student (name, age) VALUES (?, ?)",
-      [student.name, student.age]
-   );
-   return result.insertId;
- }
+// INSERT STUDENT
+export const create = async (student) => {
+    const [result] = await pool.query(
+        `INSERT INTO student
+        (name, age, program, sr_code)
+        VALUES (?, ?, ?, ?)`,
+        [
+            student.name,
+            student.age,
+            student.program,
+            student.sr_code
+        ]
+    );
 
- export const update = async (student) => {
-      const [result] = await pool.query(
-         "UPDATE student SET name = ?, age = ? WHERE id = ?",
-         [student.name, student.age, student.id]
-      );
-      return result.affectedRows;
-  }
-  
-  export const remove = async (id) => {
+    return result.insertId;
+};
+
+// UPDATE STUDENT
+export const update = async (student) => {
+    const [result] = await pool.query(
+        `UPDATE student
+        SET name = ?, age = ?, program = ?, sr_code = ?
+        WHERE id = ?`,
+        [
+            student.name,
+            student.age,
+            student.program,
+            student.sr_code,
+            student.id
+        ]
+    );
+
+    return result.affectedRows;
+};
+
+// DELETE STUDENT
+export const remove = async (id) => {
     const [result] = await pool.query(
         "DELETE FROM student WHERE id = ?",
         [id]
     );
+
     return result.affectedRows;
- }
+};
