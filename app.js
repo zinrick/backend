@@ -1,23 +1,25 @@
 import express from "express";
-import bookRoutes from "./routes/bookRoute.js";
-import studentRoutes from "./routes/studentRoute.js";
+import cors from "cors";
+import bookRoute from "./routes/bookRoute.js";    
+import studentRoute from "./routes/studentRoute.js";
+import userRoute from "./routes/userRoute.js";     
+
+let corsOptions = {
+    origin: 'http://localhost:5173',
+}
 
 const app = express();
-
-// Middleware muna
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(cors(corsOptions));
+app.use('/book', bookRoute);
+app.use('/student', studentRoute);
+app.use('/user', userRoute);
 
-// Routes pagkatapos ng middleware
-app.use('/book', bookRoutes);
-app.use('/student', studentRoutes);
-
-try {
-    const port = process.env.PORT || 3000;
-
+try{
+    const port = 3000;
     app.listen(port, () => {
         console.log(`listening to port ${port}...`);
-    });
+    }); 
 } catch(e) {
     console.log(e);
 }
